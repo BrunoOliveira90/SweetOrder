@@ -1,39 +1,39 @@
-from peewee import Model, CharField, TextField, IntegerField, ForeignKeyField, DateTimeField, BooleanField, SqliteDatabase
-from playhouse.sqlite_ext import SqliteExtDatabase
-from werkzeug.security import generate_password_hash
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
-db = SqliteExtDatabase('sweetorder.db')
+db = SQLAlchemy()
 
-class BaseModel(Model):
-    class Meta:
-        database = db
-class User(BaseModel):
-    email = CharField(unique=True)
-    password = CharField()
-    is_admin = BooleanField(default=False)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    full_name = db.Column(db.String(100), nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    cpf = db.Column(db.String(11), unique=True, nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    phone = db.Column(db.String(15), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
-    @classmethod
-    def create_user(cls, email, password, is_admin=False):
-        hashed_password = generate_password_hash(password)
-        return cls.create(email=email, password=hashed_password, is_admin=is_admin)
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image_url = db.Column(db.String(200), nullable=True)
 
-class Product(BaseModel):
-    name = CharField()
-    description = CharField()
-    price = CharField()
-    image_url = CharField()
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), nullable=False)
 
-class Order(BaseModel):
-    user = CharField()
-    status = CharField()
-    created_at = CharField()
+class OrderItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
-class OrderItem(BaseModel):
-    order = CharField()
-    product = CharField()
-    quantity = CharField()
+def initialize_db(app):
+    with app.app_context():
+        db.create_all()
 
-def initialize_db():
-    db.connect()
-    db.create_tables([User, Product, Order, OrderItem], safe=True)
-    db.close()
