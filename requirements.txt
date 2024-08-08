@@ -4,3 +4,6 @@ Flask-Bootstrap
 mysql-connector-python
 gunicorn
 psycopg2-binary
+
+Flask-Migrate
+
