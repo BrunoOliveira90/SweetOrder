@@ -6,9 +6,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/')
+'''@auth.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')'''
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,15 +20,21 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Login Succesful!', category='success')
-                return redirect(url_for('auth.home'))
+                login_user(user, remember=True)
+                return redirect(url_for('views.home'))
             else:
                 flash('Incorrect User or Password. Check and try again.', category='danger')
-
-    return redirect(url_for('auth.login'))
+        else:
+            flash('E-mail not registered', category='danger')
+            return redirect(url_for('auth.login'))
+    
+    return render_template('login.html')
 
 @auth.route('/logout')
+@login_required
 def logout():
-    return render_template('logout.html')
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 @auth.route('/products')
 def products():
@@ -36,7 +42,9 @@ def products():
 
 @auth.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
-    if request.method == 'POST':
+    if current_user.is_authenticated:
+        return redirect(url_for('views.home'))
+    elif request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
         cpf = request.form.get('cpf')
@@ -50,9 +58,9 @@ def sign_in():
         emailcheck = User.query.filter_by(email=email).first()
         
         if cpfcheck:
-            flash('CPF already registered.', category='danger')
+            flash('CPF is already registered.', category='danger')
         elif emailcheck:
-            flash('E-mail already registered.', category='danger')
+            flash('E-mail is already registered.', category='danger')
         elif len(first_name) < 2:
             flash('Name must be more than a single character', category='danger')
         elif len(last_name) < 2:
@@ -68,7 +76,8 @@ def sign_in():
             new_user = User(first_name=first_name, last_name=last_name, cpf=cpf, email=email, password=generate_password_hash(password, method='pbkdf2:sha256'), birth_date=birth_date, adress=adress, phone=phone)
             db.session.add(new_user)
             db.session.commit()
+            login_user(User, remember=True)
             flash('Account created Succesfully', category='success')
-            return redirect(url_for('auth.home'))
+            return redirect(url_for('views.home'))
         
     return render_template('sign_in.html')
