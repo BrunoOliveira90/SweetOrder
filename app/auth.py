@@ -50,9 +50,9 @@ def sign_in():
         emailcheck = User.query.filter_by(email=email).first()
         
         if cpfcheck:
-            flash('CPF already registered.', category='danger')
+            flash('CPF is already registered.', category='danger')
         elif emailcheck:
-            flash('E-mail already registered.', category='danger')
+            flash('E-mail is already registered.', category='danger')
         elif len(first_name) < 2:
             flash('Name must be more than a single character', category='danger')
         elif len(last_name) < 2:
