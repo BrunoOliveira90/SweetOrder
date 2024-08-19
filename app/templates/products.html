@@ -2,4 +2,45 @@
 
 {% block title %}Products - SweetOrder{% endblock %}
 
-{% block content %} <h1>Products Page</h1>{% endblock %}
+{% block content %} 
+
+<div class="container">
+    <h2>Products</h2>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">${{ product.price }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h2>Product List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Prod Name</th>
+            <th>Prod Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
