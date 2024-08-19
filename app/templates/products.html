@@ -10,7 +10,7 @@
         {% for product in products %}
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-                <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                <img src="{{ product.image }}" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" alt='Imagem do produto'>
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <h5 class="card-title">ID: {{ product.id }}</h5>
