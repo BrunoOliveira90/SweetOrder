@@ -9,7 +9,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-custom">
-            <a class="navbar-brand" href="{{ url_for('views.home') }}">SweetOrder</a>
+            <a class="navbar-brand">SweetOrder</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,9 +23,13 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('views.home') }}">Admin Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('auth.adm_Dashboard') }}">Admin Dashboard</a>
                     </li>
                     
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.addprod') }}">Add Product</a>
+                    </li>
+
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}

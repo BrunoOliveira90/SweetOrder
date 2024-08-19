@@ -1,14 +1,14 @@
 from flask import render_template, redirect, url_for, Blueprint, flash, request
-from .models import User
+from .models import Product, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-'''@auth.route('/')
+@auth.route('/')
 def home():
-    return render_template('index.html')'''
+    return render_template('index.html')
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -38,7 +38,59 @@ def logout():
 
 @auth.route('/products')
 def products():
-    return render_template('products.html')
+    products = Product.query.all()
+    return render_template('products.html', products=products)
+
+@auth.route('/Admin_Dashboard')
+def adm_Dashboard():
+    users = User.query.all()
+    return render_template('showdata.html', users=users)
+
+@auth.route('/Add_Product', methods=['GET', 'POST'])
+@login_required
+def addprod():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        price = request.form.get('price')
+        description = request.form.get('description')
+        
+        productname = Product.query.filter_by(name=name).first()
+
+        if productname:
+          flash('Product already registered.', category='danger')                      
+        else:
+            new_product = Product(name=name, price=price, description=description)
+            db.session.add(new_product)
+            db.session.commit()
+            flash('Product added successfully', category='success')
+            return redirect(url_for('auth.addprod'))
+    
+    return render_template('prod_add.html')
+
+@auth.route('/Edit_Product/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editprod(id): 
+     product = Product.query.get(id)
+
+     if request.method == 'POST':
+        product.name = request.form.get('name')
+        product.price = request.form.get('price')
+        product.description = request.form.get('description')
+
+        db.session.commit()
+        flash('Product updated successfully', category='success')
+        return redirect(url_for('auth.editprod', id=product.id))
+
+     return render_template('prod_edit.html', product=product)
+
+@auth.route('/Delete_Product/<int:id>', methods=['POST'])
+@login_required
+def delprod(id):
+    product = Product.query.get(id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully', category='success')
+    return redirect(url_for('auth.products'))
 
 @auth.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
@@ -76,7 +128,7 @@ def sign_in():
             new_user = User(first_name=first_name, last_name=last_name, cpf=cpf, email=email, password=generate_password_hash(password, method='pbkdf2:sha256'), birth_date=birth_date, adress=adress, phone=phone)
             db.session.add(new_user)
             db.session.commit()
-            login_user(User, remember=True)
+            login_user(new_user, remember=True)
             flash('Account created Succesfully', category='success')
             return redirect(url_for('views.home'))
         
