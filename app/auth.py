@@ -53,13 +53,14 @@ def addprod():
         name = request.form.get('name')
         price = request.form.get('price')
         description = request.form.get('description')
+        image = request.form.get('image')
         
         productname = Product.query.filter_by(name=name).first()
 
         if productname:
           flash('Product already registered.', category='danger')                      
         else:
-            new_product = Product(name=name, price=price, description=description)
+            new_product = Product(name=name, price=price, image=image, description=description)
             db.session.add(new_product)
             db.session.commit()
             flash('Product added successfully', category='success')
