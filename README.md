@@ -17,8 +17,10 @@ Link:
 Preview:
 
 Register - Creating user management
+
 ![image](https://github.com/user-attachments/assets/2f242942-aab9-451b-9733-b8296af21715)
 
 
 Products - Creating product management
+
 ![image](https://github.com/user-attachments/assets/de6f31f2-bae7-4eb9-ae76-5374a9db5067)
