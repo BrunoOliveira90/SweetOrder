@@ -67,6 +67,31 @@ def addprod():
     
     return render_template('prod_add.html')
 
+@auth.route('/Edit_Product/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editprod(id): 
+     product = Product.query.get(id)
+
+     if request.method == 'POST':
+        product.name = request.form.get('name')
+        product.price = request.form.get('price')
+        product.description = request.form.get('description')
+
+        db.session.commit()
+        flash('Product updated successfully', category='success')
+        return redirect(url_for('auth.editprod', id=product.id))
+
+     return render_template('prod_edit.html', product=product)
+
+@auth.route('/Delete_Product/<int:id>', methods=['POST'])
+@login_required
+def delprod(id):
+    product = Product.query.get(id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully', category='success')
+    return redirect(url_for('auth.products'))
+
 @auth.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
     if current_user.is_authenticated:
