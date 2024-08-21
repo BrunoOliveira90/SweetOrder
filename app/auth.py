@@ -42,6 +42,7 @@ def products():
     return render_template('products.html', products=products)
 
 @auth.route('/Admin_Dashboard')
+@login_required
 def adm_Dashboard():
     users = User.query.all()
     return render_template('showdata.html', users=users)
