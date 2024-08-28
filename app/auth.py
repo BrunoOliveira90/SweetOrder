@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, Blueprint, flash, request
+from flask import render_template, redirect, url_for, Blueprint, flash, request, abort
 from .models import Product, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -8,7 +8,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/')
 def home():
-    return render_template('index.html')
+    user = current_user
+    return render_template('index.html', user=user)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,12 +44,21 @@ def products():
 
 @auth.route('/Admin_Dashboard')
 def adm_Dashboard():
+    if not current_user.admin:
+        flash('Admin status is required to access this page.', category='danger') 
+        return redirect(url_for('auth.products'))
+    
     users = User.query.all()
     return render_template('showdata.html', users=users)
 
 @auth.route('/Add_Product', methods=['GET', 'POST'])
 @login_required
 def addprod():
+    if not current_user.admin:
+        flash('Admin status is required to access this page.', category='danger') 
+        return redirect(url_for('auth.products'))
+
+
     if request.method == 'POST':
         name = request.form.get('name')
         price = request.form.get('price')
