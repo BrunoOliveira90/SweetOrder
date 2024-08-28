@@ -14,12 +14,16 @@ html, body {
     flex-grow: 1;
 }
 
+a, h1, h2, h3, h4, h5, h6, p, th, td {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
 .container {
     padding-bottom: 50px; /* Ajuste conforme necessário */
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f7e7e1; /* Light rose champagne background */
     color: #5a5a5a; /* Darker text color for contrast */
 }
@@ -48,6 +52,11 @@ footer {
     background-color: #f8f9fa;
     text-align: center;
     padding: 10px;
+}
+
+.product-img {
+    width: 50px;
+    height: auto;
 }
 
 .footer-custom {

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <title>{% block title %}SweetOrder App{% endblock %}</title>
     </head>
     <body>
@@ -21,7 +22,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.products') }}">Products</a>
                     </li>
-                    
+                    {% if current_user.admin %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.adm_Dashboard') }}">Admin Dashboard</a>
                     </li>
@@ -29,13 +30,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.addprod') }}">Add Product</a>
                     </li>
+                    {% endif %}
 
                 </ul>
                 <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <span class="navbar-text">
-                            Logged in as: 
+                            <a>Logged in as: <mark><b> {{ current_user.first_name }} </b></mark></a>
                         </span>
                     </li>
                     <li class="nav-item">
