@@ -18,6 +18,15 @@ a, h1, h2, h3, h4, h5, h6, p, th, td {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
+mark {
+    background-color: #ffedb6; /* Cor de fundo suave */
+    color: #333; /* Cor do texto */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 0.2em 0.4em; /* Espaçamento interno (padding) para deixar o destaque mais espaçado */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    font-weight: bold; /* Negrito para destaque */
+}
+
 .container {
     padding-bottom: 50px; /* Ajuste conforme necessário */
 }
