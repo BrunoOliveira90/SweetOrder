@@ -44,12 +44,21 @@ def products():
 @auth.route('/Admin_Dashboard')
 @login_required
 def adm_Dashboard():
+    if not current_user.admin:
+        flash('Admin status is required to access this page.', category='danger') 
+        return redirect(url_for('auth.products'))
+    
     users = User.query.all()
-    return render_template('showdata.html', users=users)
+    products = Product.query.all()
+    return render_template('showdata.html', users=users, products=products)
 
 @auth.route('/Add_Product', methods=['GET', 'POST'])
 @login_required
 def addprod():
+    if not current_user.admin:
+        flash('Admin status is required to access this page.', category='danger') 
+        return redirect(url_for('auth.products'))
+    
     if request.method == 'POST':
         name = request.form.get('name')
         price = request.form.get('price')
@@ -72,6 +81,10 @@ def addprod():
 @auth.route('/Edit_Product/<int:id>', methods=['GET', 'POST'])
 @login_required
 def editprod(id): 
+     if not current_user.admin:
+        flash('Admin status is required to access this page.', category='danger') 
+        return redirect(url_for('auth.products'))
+     
      product = Product.query.get(id)
 
      if request.method == 'POST':

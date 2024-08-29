@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     birth_date = db.Column(db.String(20))
     adress = db.Column(db.String(250))
     phone = db.Column(db.String(12))
+    admin = db.Column(db.Boolean, default=False)
     
 
 
