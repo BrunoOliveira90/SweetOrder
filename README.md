@@ -22,3 +22,6 @@ Register - Creating user management
 
 Products - Creating product management
 ![image](https://github.com/user-attachments/assets/de6f31f2-bae7-4eb9-ae76-5374a9db5067)
+
+Admin vs Client Access
+![image](https://github.com/user-attachments/assets/5f034b8e-7964-4dc0-bbec-18a947c1d1f4)
