@@ -1,35 +1,34 @@
 {% extends "base.html" %}
-{% block title %}My Cart{% endblock %}
 {% block content %}
 <div class="container">
-    <h2>My Cart</h2>
+    <h2>Your Cart</h2>
     {% if cart %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product_id, item in cart.items() %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>${{ item.price }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>${{ item.price * item.quantity }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <h3>Total: ${{ sum(item.price * item.quantity for item in cart.values()) }}</h3>
-    <form method="POST" action="{{ url_for('auth.checkout') }}">
-        <button type="submit" class="btn btn-success">Checkout</button>
-    </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = 0 %}
+                {% for item in cart.values() %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.price * item.quantity }}</td>
+                </tr>
+                {% set total = total + (item.price * item.quantity) %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: ${{ total }}</h3>
+        <a href="{{ url_for('auth.checkout') }}" class="btn btn-success">Checkout</a>
     {% else %}
-    <p>Your cart is empty.</p>
+        <p>Your cart is empty.</p>
     {% endif %}
 </div>
 {% endblock %}

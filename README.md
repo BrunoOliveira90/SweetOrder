@@ -28,5 +28,5 @@ Products - Creating product management
 Admin vs Client Access
 ![image](https://github.com/user-attachments/assets/5f034b8e-7964-4dc0-bbec-18a947c1d1f4)
 
-Orders:
-(no preview)
+Orders - CART:
+![image](https://github.com/user-attachments/assets/67b1c19e-6b12-43c6-9c21-7eb396561bc8)
