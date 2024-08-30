@@ -23,7 +23,16 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(5000), nullable=False)
 
+class OrderItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    product = db.relationship('Product')
+
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    status = db.Column(db.String(20), nullable=False)
+    status = db.Column(db.String(20), nullable=False, default='Pendente')
+    items = db.relationship('OrderItem', backref='order', lazy=True)
+    total = db.Column(db.Float, nullable=False)
