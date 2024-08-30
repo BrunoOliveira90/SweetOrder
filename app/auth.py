@@ -1,5 +1,5 @@
-from flask import render_template, redirect, url_for, Blueprint, flash, request
-from .models import Product, User
+from flask import render_template, redirect, session, url_for, Blueprint, flash, request
+from .models import Order, OrderItem, Product, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -148,3 +148,67 @@ def sign_in():
             return redirect(url_for('views.home'))
         
     return render_template('sign_in.html')
+
+
+@auth.route('/add_to_cart/<int:product_id>')
+@login_required
+def add_to_cart(product_id):
+    product = Product.query.get(product_id)
+    if not product:
+        flash('Product not found.', category='danger')
+        return redirect(url_for('auth.products'))
+
+    cart = session.get('cart', {})
+    if str(product_id) in cart:
+        cart[str(product_id)]['quantity'] += 1
+    else:
+        cart[str(product_id)] = {'name': product.name, 'price': product.price, 'quantity': 1}
+    
+    session['cart'] = cart
+    flash('Product added to cart!', category='success')
+    return redirect(url_for('auth.products'))
+
+
+@auth.route('/cart')
+@login_required
+def cart():
+    cart = session.get('cart', {})
+    return render_template('cart.html', cart=cart)
+
+@auth.route('/checkout', methods=['POST'])
+@login_required
+def checkout():
+    cart = session.get('cart', {})
+    if not cart:
+        flash('Your cart is empty.', category='danger')
+        return redirect(url_for('auth.products'))
+    
+    new_order = Order(user_id=current_user.id, status='Pendente', total=sum(item['price'] * item['quantity'] for item in cart.values()))
+    db.session.add(new_order)
+    db.session.commit()
+
+    for product_id, item in cart.items():
+        order_item = OrderItem(order_id=new_order.id, product_id=int(product_id), quantity=item['quantity'])
+        db.session.add(order_item)
+    
+    db.session.commit()
+    session.pop('cart', None)
+    flash('Order placed successfully!', category='success')
+    return redirect(url_for('auth.my_orders'))
+
+@auth.route('/my_orders')
+@login_required
+def my_orders():
+    orders = Order.query.filter_by(user_id=current_user.id).all()
+    return render_template('my_orders.html', orders=orders)
+
+
+@auth.route('/admin_orders')
+@login_required
+def admin_orders():
+    if not current_user.admin:
+        flash('Admin access required.', category='danger')
+        return redirect(url_for('auth.products'))
+    
+    orders = Order.query.all()
+    return render_template('admin_orders.html', orders=orders)

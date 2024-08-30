@@ -22,11 +22,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.products') }}">Products</a>
                     </li>
+                    {% if not current_user.admin %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.my_orders') }}">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.cart') }}">Cart</a>
+                    </li>
+                    {% endif %}
                     {% if current_user.admin %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.adm_Dashboard') }}">Admin Dashboard</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.admin_orders') }}">ORDERS</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.addprod') }}">Add Product</a>
                     </li>
