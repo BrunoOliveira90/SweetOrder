@@ -14,6 +14,12 @@ Branch
 
 Link:
 
+Solving now:
+    Better view on My Orders
+    Remove product on cart
+    Admin: Set Order: Pending, On Production, On Delivery, Finished.
+    Script to add 20 Random products
+
 Preview:
 
 Register - Creating user management
@@ -26,5 +32,9 @@ Products - Creating product management
 Admin vs Client Access
 ![image](https://github.com/user-attachments/assets/5f034b8e-7964-4dc0-bbec-18a947c1d1f4)
 
-Orders - CART:
+CART:
 ![image](https://github.com/user-attachments/assets/67b1c19e-6b12-43c6-9c21-7eb396561bc8)
+
+ORDERS:
+
+![image](https://github.com/user-attachments/assets/f2f3b5c0-be07-4ea6-ab0a-b510eaeb6593)

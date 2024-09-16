@@ -132,7 +132,7 @@ def sign_in():
             flash('Name must be more than a single character', category='danger')
         elif len(last_name) < 2:
             flash('Last name must be more than a single character', category='danger')
-        elif len(cpf) != 11:
+        elif len(cpf) != 11: #This CPF validation will be changed to a real CPF validation.
             flash('Enter a valid CPF number', category='danger')
         elif len(email) < 4:
             flash('E-mail must be greater than 3 characters', category='danger')
@@ -173,7 +173,8 @@ def add_to_cart(product_id):
 @login_required
 def cart():
     cart = session.get('cart', {})
-    return render_template('cart.html', cart=cart)
+    total = sum(item['price'] * item['quantity'] for item in cart.values())
+    return render_template('cart.html', cart=cart, total=total)
 
 @auth.route('/checkout', methods=['POST'])
 @login_required
