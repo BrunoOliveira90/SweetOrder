@@ -13,7 +13,6 @@
                 </tr>
             </thead>
             <tbody>
-                {% set total = 0 %}
                 {% for item in cart.values() %}
                 <tr>
                     <td>{{ item.name }}</td>
@@ -21,14 +20,15 @@
                     <td>${{ item.price }}</td>
                     <td>${{ item.price * item.quantity }}</td>
                 </tr>
-                {% set total = total + (item.price * item.quantity) %}
                 {% endfor %}
             </tbody>
         </table>
-        <h3>Total: ${{ total }}</h3>
-        <a href="{{ url_for('auth.checkout') }}" class="btn btn-success">Checkout</a>
+        <h3 align="right">Total: ${{ total }}</h3>
+        <form action="{{ url_for('auth.checkout') }}" method="POST">
+            <button type="submit" class="btn btn-success">Checkout</button>
+        </form>
     {% else %}
-        <p>Your cart is empty.</p>
+        <p>No products added.</p>
     {% endif %}
 </div>
 {% endblock %}
