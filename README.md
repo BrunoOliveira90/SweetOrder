@@ -15,9 +15,16 @@ Branch
 Link:
 
 Solving now:
+    
+    DONE: Remove product on cart - Also updating Quantity, added thumbnail
+
+    
     Better view on My Orders
-    Remove product on cart
+    
+    
     Admin: Set Order: Pending, On Production, On Delivery, Finished.
+    
+    
     Script to add 20 Random products
 
 Preview:
