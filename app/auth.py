@@ -162,7 +162,7 @@ def add_to_cart(product_id):
     if str(product_id) in cart:
         cart[str(product_id)]['quantity'] += 1
     else:
-        cart[str(product_id)] = {'name': product.name, 'price': product.price, 'quantity': 1}
+        cart[str(product_id)] = {'name': product.name, 'price': product.price, 'quantity': 1, 'image': product.image}
     
     session['cart'] = cart
     flash('Product added to cart!', category='success')
@@ -175,6 +175,50 @@ def cart():
     cart = session.get('cart', {})
     total = sum(item['price'] * item['quantity'] for item in cart.values())
     return render_template('cart.html', cart=cart, total=total)
+
+@auth.route('/cart/increase/<int:product_id>')
+@login_required
+def increase_quantity(product_id):
+    cart = session.get('cart', {})
+    if str(product_id) in cart:
+        cart[str(product_id)]['quantity'] += 1
+        session['cart'] = cart
+    return redirect(url_for('auth.cart'))
+
+@auth.route('/cart/decrease/<int:product_id>')
+@login_required
+def decrease_quantity(product_id):
+    cart = session.get('cart', {})
+    if str(product_id) in cart and cart[str(product_id)]['quantity'] > 1:
+        cart[str(product_id)]['quantity'] -= 1
+        session['cart'] = cart
+    else:
+        flash('Minimum quantity is 1.', category='danger')
+    
+    return redirect(url_for('auth.cart'))
+
+
+@auth.route('/remove_from_cart/<int:product_id>', methods=['POST'])
+@login_required
+def remove_from_cart(product_id):
+    cart = session.get('cart', {})
+    
+    if str(product_id) in cart:
+        cart.pop(str(product_id))
+        session['cart'] = cart
+        flash('Item removido do carrinho.', category='success')
+    else:
+        flash('Item não encontrado no carrinho.', category='danger')
+    
+    return redirect(url_for('auth.cart'))
+
+@auth.route('/clear_cart', methods=['POST'])
+@login_required
+def clear_cart():
+    session.pop('cart', None)
+    flash('Carrinho esvaziado.', category='success')
+    return redirect(url_for('auth.cart'))
+
 
 @auth.route('/checkout', methods=['POST'])
 @login_required
