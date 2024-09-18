@@ -48,7 +48,9 @@
                         <p>Preço: ${{ product.price }}</p>
                     </div>
                     <div class="modal-footer">
+                        {% if not current_user.admin %}
                         <a href="{{ url_for('auth.add_to_cart', product_id=product.id) }}" class="btn btn-primary">Add to Cart</a>
+                        {% endif %}
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         {% if current_user.admin %}
                         <a href="{{ url_for('auth.editprod', id=product.id) }}" class="btn btn-primary">Edit</a>

@@ -4,14 +4,33 @@
 <div class="container">
     <h2>My Orders</h2>
     {% for order in orders %}
-    <div class="card mb-3">
-        <div class="card-header">
-            Order #{{ order.id }} - Status: {{ order.status }} - Total: ${{ order.total }}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center bg-light">
+            <div>
+                <strong>Order #{{ order.id }}</strong> - 
+                <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
+                    {{ order.status }}</span></span>
+            </div>
+            <div class="d-flex align-items-center">
+                {% if order.status == 'Pendente' %}
+                <form action="{{ url_for('auth.cancel_order', order_id=order.id) }}" method="POST">
+                    <button type="submit" class="btn btn-sm btn-danger">Cancelar Pedido</button>
+                </form>
+                {% endif %}
+                <strong> Total: ${{ order.total }}</strong>
+            </div>
         </div>
         <ul class="list-group list-group-flush">
             {% for item in order.items %}
-            <li class="list-group-item">
-                {{ item.product.name }} - Quantity: {{ item.quantity }} - Price: ${{ item.product.price }}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                    {{ item.product.name }} 
+                </div>
+                <div>
+                    <span>Qty: {{ item.quantity }}</span> - 
+                    <strong>${{ item.product.price }}</strong>
+                </div>
             </li>
             {% endfor %}
         </ul>
