@@ -27,6 +27,9 @@ Solving now:
     
     Script to add 20 Random products
 
+
+    Foung a bug: Admin could checkout an order. Needs Fix, also needs to block Admin to access Cart page, and some other pages that's not necessary to Admin.
+
 Preview:
 
 Register - Creating user management

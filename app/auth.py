@@ -52,6 +52,27 @@ def adm_Dashboard():
     products = Product.query.all()
     return render_template('showdata.html', users=users, products=products)
 
+@auth.route('/admin/update_order_status/<int:order_id>', methods=['POST'])
+@login_required
+def update_order_status(order_id):
+    if not current_user.admin:
+        flash('Acesso negado. Apenas administradores podem alterar o status dos pedidos.', 'danger')
+        return redirect(url_for('auth.admin_orders'))
+
+    order = Order.query.get_or_404(order_id)
+    
+    new_status = request.form.get('status')
+
+    if new_status:
+        order.status = new_status
+        db.session.commit()
+        flash(f'Status do pedido #{order.id} atualizado para {new_status}', 'success')
+    else:
+        flash('Selecione um status válido.', 'danger')
+
+    return redirect(url_for('auth.admin_orders'))
+
+
 @auth.route('/Add_Product', methods=['GET', 'POST'])
 @login_required
 def addprod():
@@ -246,6 +267,23 @@ def checkout():
 def my_orders():
     orders = Order.query.filter_by(user_id=current_user.id).all()
     return render_template('my_orders.html', orders=orders)
+
+@auth.route('/cancel_order/<int:order_id>', methods=['POST'])
+def cancel_order(order_id):
+    order = Order.query.get(order_id)
+
+
+    if order and order.user_id == current_user.id:
+        if order.status == "Pendente":
+            order.status = "Cancelado"
+            db.session.commit()
+            flash('Pedido cancelado com sucesso!', 'success')
+        else:
+            flash('Somente pedidos pendentes podem ser cancelados.', 'warning')
+    else:
+        flash('Pedido não encontrado ou não autorizado.', 'danger')
+
+    return redirect(url_for('auth.my_orders'))
 
 
 @auth.route('/admin_orders')
