@@ -18,6 +18,8 @@ Solving now:
     
     DONE: Remove product on cart - Also updating Quantity, added thumbnail
 
+    Flash Messages now dissapear, with script added on Base.html.
+
     
     Better view on My Orders
     

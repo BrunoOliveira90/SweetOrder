@@ -7,7 +7,7 @@
     <div class="card mb-4 shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center bg-light">
             <div>
-                <strong>Order #{{ order.id }}</strong> - 
+                <strong>Order #{{ order.id }} </strong> | Cliente: <strong>{{ order.user.first_name }} {{ order.user.last_name }}</strong> - 
                 <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
                     {{ order.status }}</span></span>
             </div>

@@ -45,7 +45,7 @@ def products():
 @login_required
 def adm_Dashboard():
     if not current_user.admin:
-        flash('Admin status is required to access this page.', category='danger') 
+        flash('Somente o administrador pode acessar esta página.', category='danger') 
         return redirect(url_for('auth.products'))
     
     users = User.query.all()
@@ -77,7 +77,7 @@ def update_order_status(order_id):
 @login_required
 def addprod():
     if not current_user.admin:
-        flash('Admin status is required to access this page.', category='danger') 
+        flash('Somente o administrador pode acessar esta página.', category='danger') 
         return redirect(url_for('auth.products'))
     
     if request.method == 'POST':
@@ -103,7 +103,7 @@ def addprod():
 @login_required
 def editprod(id): 
      if not current_user.admin:
-        flash('Admin status is required to access this page.', category='danger') 
+        flash('Somente o administrador pode acessar esta página.', category='danger') 
         return redirect(url_for('auth.products'))
      
      product = Product.query.get(id)
@@ -146,26 +146,26 @@ def sign_in():
         emailcheck = User.query.filter_by(email=email).first()
         
         if cpfcheck:
-            flash('CPF is already registered.', category='danger')
+            flash('Este CPF já está registrado.', category='danger')
         elif emailcheck:
-            flash('E-mail is already registered.', category='danger')
+            flash('Este E-mail já está registrado.', category='danger')
         elif len(first_name) < 2:
-            flash('Name must be more than a single character', category='danger')
+            flash('O nome deve conter mais de um caractere.', category='danger')
         elif len(last_name) < 2:
-            flash('Last name must be more than a single character', category='danger')
-        elif len(cpf) != 11: #This CPF validation will be changed to a real CPF validation.
-            flash('Enter a valid CPF number', category='danger')
-        elif len(email) < 4:
-            flash('E-mail must be greater than 3 characters', category='danger')
+            flash('O último nome deve conter mais de um caractere', category='danger')
+        elif len(cpf) != 11: #Validação de CPF será substituída por uma validação de CPF real.
+            flash('Insira um CPF válido', category='danger')
+        elif len(email) < 4: #Validação de E-mail será substituída por uma validação de E-mail real.
+            flash('E-mail deve conter mais de 3 caracteres', category='danger')
         elif len(password) < 6:
-            flash('Password must have at least 6 characters', category='danger')
+            flash('Sua senha deve conter pelo menos 6 caracteres', category='danger')
         
         else:
             new_user = User(first_name=first_name, last_name=last_name, cpf=cpf, email=email, password=generate_password_hash(password, method='pbkdf2:sha256'), birth_date=birth_date, adress=adress, phone=phone)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created Succesfully', category='success')
+            flash('Conta criada com sucesso', category='success')
             return redirect(url_for('views.home'))
         
     return render_template('sign_in.html')
