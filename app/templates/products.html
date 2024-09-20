@@ -21,10 +21,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">${{ product.price }}</small>
                         {% if current_user.admin %}
-                        <a href="{{ url_for('auth.editprod', id=product.id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url_for('auth.editprod', id=product.id) }}" class="btn btn-primary">Editar</a>
                         {% endif %}
                         {% if not current_user.admin %}
-                        <a href="{{ url_for('auth.add_to_cart', product_id=product.id) }}" class="btn btn-primary">Add to Cart</a>
+                        <a href="{{ url_for('auth.add_to_cart', product_id=product.id) }}" class="btn btn-primary"><i class="bi bi-cart"></i> Adicionar</a>
                         {% endif %}
                     </div>
                 </div>
@@ -49,10 +49,10 @@
                     </div>
                     <div class="modal-footer">
                         {% if not current_user.admin %}
-                        <a href="{{ url_for('auth.add_to_cart', product_id=product.id) }}" class="btn btn-primary">Add to Cart</a>
+                        <a href="{{ url_for('auth.add_to_cart', product_id=product.id) }}" class="btn btn-primary">Adicionar</a>
                         {% endif %}
                         {% if current_user.admin %}
-                        <a href="{{ url_for('auth.editprod', id=product.id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url_for('auth.editprod', id=product.id) }}" class="btn btn-primary">Editar</a>
                         {% endif %}
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     </div>

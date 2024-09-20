@@ -36,3 +36,4 @@ class Order(db.Model):
     status = db.Column(db.String(20), nullable=False, default='Pendente')
     items = db.relationship('OrderItem', backref='order', lazy=True)
     total = db.Column(db.Float, nullable=False)
+    user = db.relationship('User', backref='orders')
