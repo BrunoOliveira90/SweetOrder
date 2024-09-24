@@ -8,7 +8,7 @@
         <div class="card-header d-flex justify-content-between align-items-center bg-light">
             <div>
                 <strong>Order #{{ order.id }} </strong> | Cliente: <strong>{{ order.user.first_name }} {{ order.user.last_name }}</strong> - 
-                <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
+                <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Em produção' %}badge-info{% elif order.status == 'Em rota de entrega' %}badge-primary{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
                     {{ order.status }}</span></span>
             </div>
             <div class="d-flex align-items-center">
@@ -30,19 +30,28 @@
             {% endfor %}
         </ul>
         <div class="card-footer bg-light">
-            <form action="{{ url_for('auth.update_order_status', order_id=order.id) }}" method="POST" class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <select name="status" class="form-control form-control-sm">
-                        <option value="Pendente" {% if order.status == 'Pendente' %}selected{% endif %}>Pendente</option>
-                        <option value="Em produção" {% if order.status == 'Em produção' %}selected{% endif %}>Em produção</option>
-                        <option value="Em rota de entrega" {% if order.status == 'Em rota de entrega' %}selected{% endif %}>Em rota de entrega</option>
-                        <option value="Finalizado" {% if order.status == 'Finalizado' %}selected{% endif %}>Finalizado</option>
-                        <option value="Cancelado" {% if order.status == 'Cancelado' %}selected{% endif %}>Cancelado</option>
-                    </select>
+                    <form action="{{ url_for('auth.update_order_status', order_id=order.id) }}" method="POST">
+                        <select name="status" class="form-control form-control-sm">
+                            <option value="Pendente" {% if order.status == 'Pendente' %}selected{% endif %}>Pendente</option>
+                            <option value="Em produção" {% if order.status == 'Em produção' %}selected{% endif %}>Em produção</option>
+                            <option value="Em rota de entrega" {% if order.status == 'Em rota de entrega' %}selected{% endif %}>Em rota de entrega</option>
+                            <option value="Finalizado" {% if order.status == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+                            <option value="Cancelado" {% if order.status == 'Cancelado' %}selected{% endif %}>Cancelado</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary mt-2">Update Status</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary">Update Status</button>
-            </form>
+                <div>
+                    <form action="{{ url_for('auth.delete_order', order_id=order.id) }}" method="POST">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Excluir</button>
+                    </form>
+                </div>
+            </div>
         </div>
+        
+        
     </div>
     {% endfor %}
 </div>

@@ -1,5 +1,8 @@
 from . import db
 from flask_login import UserMixin
+from wtforms import PasswordField, StringField
+from wtforms.validators import DataRequired, Email, Optional, Length
+from flask_wtf import FlaskForm
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,7 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     birth_date = db.Column(db.String(20))
-    adress = db.Column(db.String(250))
+    address = db.Column(db.String(250))
     phone = db.Column(db.String(12))
     admin = db.Column(db.Boolean, default=False)
     
@@ -37,3 +40,10 @@ class Order(db.Model):
     items = db.relationship('OrderItem', backref='order', lazy=True)
     total = db.Column(db.Float, nullable=False)
     user = db.relationship('User', backref='orders')
+
+
+class UpdateProfileForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    address = StringField('Endereço', validators=[DataRequired()])
+    phone = StringField('Telefone', validators=[DataRequired(), Length(min=10, max=15)])
+    password = PasswordField('Senha', validators=[Optional()])
