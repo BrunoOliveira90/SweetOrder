@@ -23,14 +23,18 @@ Solving now:
     
     Better view on My Orders
     
+    Better view on My_Profile, showing complete data.
     
     Admin: Set Order: Pending, On Production, On Delivery, Finished.
     
     
-    Script to add 20 Random products
+    Script to add 20 Random products Done!
 
 
-    Foung a bug: Admin could checkout an order. Needs Fix, also needs to block Admin to access Cart page, and some other pages that's not necessary to Admin.
+    Foung a bug: Admin could checkout an order. Needs Fix, also needs to block Admin to access Cart page, and some other pages that's not necessary to Admin. 
+    Partially solved but... (Decorator could be used.) Check any other routes that admin shouldn't access.
+
+Next Steps: Make exclusive files for admin, client and products routes. Getting more clean code.
 
 Preview:
 
