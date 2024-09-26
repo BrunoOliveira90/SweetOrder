@@ -20,28 +20,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('views.home') }}">Home</a>
+                        <a class="nav-link" href="{{ url_for('auth.home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.products') }}">Products</a>
+                        <a class="nav-link" href="{{ url_for('client.products') }}">Products</a>
                     </li>
                     {% if not current_user.admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.my_orders') }}">My Orders</a>
+                        <a class="nav-link" href="{{ url_for('client.my_orders') }}">My Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.cart') }}">Cart</a>
+                        <a class="nav-link" href="{{ url_for('client.cart') }}">Cart</a>
                     </li>
                     {% endif %}
                     {% if current_user.admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.adm_Dashboard') }}">Admin Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('admin.adm_Dashboard') }}">Admin Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.admin_orders') }}">ORDERS</a>
+                        <a class="nav-link" href="{{ url_for('admin.admin_orders') }}">ORDERS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.addprod') }}">Add Product</a>
+                        <a class="nav-link" href="{{ url_for('admin.addprod') }}">Add Product</a>
                     </li>
                     {% endif %}
 

@@ -14,43 +14,26 @@ Branch
 
 Link:
 
-Solving now:
-    
-    DONE: Remove product on cart - Also updating Quantity, added thumbnail
-
-    Flash Messages now dissapear, with script added on Base.html.
-
-    
-    Better view on My Orders
-    
-    Better view on My_Profile, showing complete data.
-    
-    Admin: Set Order: Pending, On Production, On Delivery, Finished.
-    
-    
-    Script to add 20 Random products Done!
+Important for future: E-mail validation, Address validation, with CEP search, CPF validation.
 
 
-    Foung a bug: Admin could checkout an order. Needs Fix, also needs to block Admin to access Cart page, and some other pages that's not necessary to Admin. 
-    Partially solved but... (Decorator could be used.) Check any other routes that admin shouldn't access.
+Next Steps:  Make index page. Start to style everything. Create a confirmation warning on Delete_Order button. Test many users. Rename showdata.html. Check button Style con my_profile.html. Update previews.
 
-Next Steps: Make exclusive files for admin, client and products routes. Getting more clean code.
 
 Preview:
 
 Register - Creating user management
-![image](https://github.com/user-attachments/assets/2f242942-aab9-451b-9733-b8296af21715)
 
 
 Products - Creating product management
-![image](https://github.com/user-attachments/assets/de6f31f2-bae7-4eb9-ae76-5374a9db5067)
+
 
 Admin vs Client Access
-![image](https://github.com/user-attachments/assets/5f034b8e-7964-4dc0-bbec-18a947c1d1f4)
+
 
 CART:
-![image](https://github.com/user-attachments/assets/67b1c19e-6b12-43c6-9c21-7eb396561bc8)
+
 
 ORDERS:
 
-![image](https://github.com/user-attachments/assets/f2f3b5c0-be07-4ea6-ab0a-b510eaeb6593)
+

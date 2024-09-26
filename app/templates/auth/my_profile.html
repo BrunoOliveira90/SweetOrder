@@ -1,0 +1,97 @@
+{% extends "shared/base.html" %}
+
+{% block title %}Meus dados - SweetOrder{% endblock %}
+
+{% block content %} <h1>Meus dados </h1> 
+
+<form class="form-horizontal" method="POST" action="{{ url_for('auth.update_profile') }}">
+
+    <div class="card p-3 mb-4">
+        <h4 class="card-title">Informações Pessoais</h4>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">Nome:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{current_user.first_name}}" readonly>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Sobrenome:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{current_user.last_name}}" readonly>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="cpf">CPF:</label>
+                <input type="text" class="form-control" id="cpf" value="{{current_user.cpf}}" readonly>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="phone">Telefone:</label>
+                <input type="text" class="form-control" id="phone" value="{{current_user.phone}}" readonly>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="birthdate">Data de Nascimento:</label>
+                <input type="text" class="form-control" id="birthdate" value="{{current_user.birth_date}}" readonly>
+            </div>
+        </div>
+           
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="text" class="form-control" id="email" value="{{current_user.email}}" readonly>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="address">Endereço:</label>
+            <input type="text" class="form-control" id="address" value="{{current_user.address}}" readonly>
+        </div>
+
+
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="{{current_user.email}}">
+    </div>
+    <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Pelo menos  6 caracteres">
+    </div>
+    <div class="form-group">
+        <label for="address">Endereço:</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="{{current_user.address}}">
+    </div>
+    <div class="form-group">
+        <label for="phone">Telefone:</label>
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="{{current_user.phone}}">
+    </div>
+    <button type="submit" class="btn btn-primary" id="updateBtn" disabled>Atualizar</button>
+</form>
+
+<script>
+    
+    const updateBtn = document.getElementById('updateBtn');
+    const formFields = document.querySelectorAll('#email, #password, #address, #phone');
+    
+    
+    function checkForm() {
+        let hasChange = false;
+        
+        
+        formFields.forEach(field => {
+            if (field.value.trim() !== '' && field.value !== field.defaultValue) {
+                hasChange = true;
+            }
+        });
+
+        
+        updateBtn.disabled = !hasChange;
+    }
+
+    
+    formFields.forEach(field => {
+        field.addEventListener('input', checkForm);
+    });
+</script>
+
+{% endblock %}
