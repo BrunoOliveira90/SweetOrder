@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "shared/base.html" %}
 {% block title %}Manage Orders{% endblock %}
 {% block content %}
 <div class="container">
@@ -32,7 +32,7 @@
         <div class="card-footer bg-light">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <form action="{{ url_for('auth.update_order_status', order_id=order.id) }}" method="POST">
+                    <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
                         <select name="status" class="form-control form-control-sm">
                             <option value="Pendente" {% if order.status == 'Pendente' %}selected{% endif %}>Pendente</option>
                             <option value="Em produção" {% if order.status == 'Em produção' %}selected{% endif %}>Em produção</option>
@@ -44,7 +44,7 @@
                     </form>
                 </div>
                 <div>
-                    <form action="{{ url_for('auth.delete_order', order_id=order.id) }}" method="POST">
+                    <form action="{{ url_for('admin.delete_order', order_id=order.id) }}" method="POST">
                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Excluir</button>
                     </form>
                 </div>

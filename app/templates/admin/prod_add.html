@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "shared/base.html" %}
 
 {% block title %}Add Product - SweetOrder{% endblock %}
 
@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <h2>Add Product</h2>
-    <form class="form-horizontal" method="POST" action="{{ url_for('auth.addprod') }}">
+    <form class="form-horizontal" method="POST" action="{{ url_for('admin.addprod') }}">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="first_name">Product Name:</label>
