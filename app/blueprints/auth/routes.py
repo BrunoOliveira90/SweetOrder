@@ -66,9 +66,9 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('auth.home'))
             else:
-                flash('Incorrect User or Password. Check and try again.', category='danger')
+                flash('E-mail ou senha incorretos. Tente novamente.', category='danger')
         else:
-            flash('E-mail not registered', category='danger')
+            flash('E-mail não registrado', category='danger')
             return redirect(url_for('auth.login'))
     
     return render_template('auth/login.html')

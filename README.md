@@ -17,23 +17,8 @@ Link:
 Important for future: E-mail validation, Address validation, with CEP search, CPF validation.
 
 
-Next Steps:  Make index page. Start to style everything. Create a confirmation warning on Delete_Order button. Test many users. Rename showdata.html. Check button Style con my_profile.html. Update previews.
+Next Steps: Translate all routes and app(continue). Make index page. Start to style everything. Update previews. Add icon on Block Tittle.
 
 
 Preview:
-
-Register - Creating user management
-
-
-Products - Creating product management
-
-
-Admin vs Client Access
-
-
-CART:
-
-
-ORDERS:
-
 

@@ -109,4 +109,12 @@ footer {
     
   }
 
-  
+  #updateBtn {
+    background-color: #e4a0a0; /* Cor do botão primário */
+    border-color: #e4a0a0;
+}
+
+#updateBtn:hover {
+    background-color: #d89090; /* Cor de hover do botão primário */
+    border-color: #d89090;
+}

@@ -1,15 +1,16 @@
 {% extends "shared/base.html" %}
+{% block title %}Carrinho - SweetOrder{% endblock %}
 {% block content %}
 <div class="container">
-    <h2>Your Cart</h2>
+    <h2>Carrinho</h2>
     {% if cart %}
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th style="width: 50px; text-align: center;">-</th>
                     <th>Product</th>
-                    <th>Price</th>
                     <th>Quantity</th>
+                    <th>Price</th>
                     <th>Total</th>
                     <th style="width: 160px; text-align: left;">
                         <form action="{{ url_for('client.clear_cart') }}" method="POST">
@@ -50,7 +51,7 @@
             </form>
         </div>
     {% else %}
-        <p>No products added.</p>
+        <p>Nenhum produto foi adicionado.</p>
     {% endif %}
 </div>
 {% endblock %}

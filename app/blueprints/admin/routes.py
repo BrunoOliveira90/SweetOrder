@@ -5,7 +5,7 @@ from app.models import Order, OrderItem, Product, User
 
 admin = Blueprint('admin', __name__)
 
-@admin.route('/Admin_Dashboard')
+@admin.route('/painel_do_admin')
 @login_required
 def adm_Dashboard():
     if not current_user.admin:
@@ -14,7 +14,7 @@ def adm_Dashboard():
     
     users = User.query.all()
     products = Product.query.all()
-    return render_template('admin/showdata.html', users=users, products=products)
+    return render_template('admin/dashboard.html', users=users, products=products)
 
 @admin.route('/admin/update_order_status/<int:order_id>', methods=['POST'])
 @login_required
@@ -37,7 +37,7 @@ def update_order_status(order_id):
     return redirect(url_for('admin.admin_orders'))
 
 
-@admin.route('/Add_Product', methods=['GET', 'POST'])
+@admin.route('/add_product', methods=['GET', 'POST'])
 @login_required
 def addprod():
     if not current_user.admin:
@@ -53,12 +53,12 @@ def addprod():
         productname = Product.query.filter_by(name=name).first()
 
         if productname:
-          flash('Product already registered.', category='danger')                      
+          flash('Este produto já foi registrado.', category='danger')                      
         else:
             new_product = Product(name=name, price=price, image=image, description=description)
             db.session.add(new_product)
             db.session.commit()
-            flash('Product added successfully', category='success')
+            flash('Produto adicionado com sucesso', category='success')
             return redirect(url_for('admin.addprod'))
     
     return render_template('admin/prod_add.html')
@@ -78,7 +78,7 @@ def editprod(id):
         product.description = request.form.get('description')
 
         db.session.commit()
-        flash('Product updated successfully', category='success')
+        flash('Produto atualizado com sucesso', category='success')
         return redirect(url_for('admin.editprod', id=product.id))
 
      return render_template('admin/prod_edit.html', product=product)
@@ -89,7 +89,7 @@ def delprod(id):
     product = Product.query.get(id)
     db.session.delete(product)
     db.session.commit()
-    flash('Product deleted successfully', category='success')
+    flash('Produto removido com sucesso', category='success')
     return redirect(url_for('client.products'))
 
 
@@ -97,7 +97,7 @@ def delprod(id):
 @login_required
 def admin_orders():
     if not current_user.admin:
-        flash('Admin access required.', category='danger')
+        flash('Apenas administradores podem acessar essa página.', category='danger')
         return redirect(url_for('client.products'))
     
     orders = Order.query.all()
