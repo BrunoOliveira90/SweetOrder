@@ -21,7 +21,7 @@ def add_to_cart(product_id):
 
     product = Product.query.get(product_id)
     if not product:
-        flash('Product not found.', category='danger')
+        flash('Produto não encontrado.', category='danger')
         return redirect(url_for('client.products'))
 
     cart = session.get('cart', {})
@@ -31,7 +31,7 @@ def add_to_cart(product_id):
         cart[str(product_id)] = {'name': product.name, 'price': product.price, 'quantity': 1, 'image': product.image}
     
     session['cart'] = cart
-    flash('Product added to cart!', category='success')
+    flash('Produto adicionado ao carrinho!', category='success')
     return redirect(url_for('client.products'))
 
 
@@ -71,7 +71,7 @@ def decrease_quantity(product_id):
         cart[str(product_id)]['quantity'] -= 1
         session['cart'] = cart
     else:
-        flash('Minimum quantity is 1.', category='danger')
+        flash('A quantidade mínima é 1.', category='danger')
     
     return redirect(url_for('client.cart'))
 
@@ -116,7 +116,7 @@ def checkout():
 
     cart = session.get('cart', {})
     if not cart:
-        flash('Your cart is empty.', category='danger')
+        flash('Seu carrinho está vazio.', category='danger')
         return redirect(url_for('client.products'))
     
     new_order = Order(user_id=current_user.id, status='Pendente', total=sum(item['price'] * item['quantity'] for item in cart.values()))
@@ -129,7 +129,7 @@ def checkout():
     
     db.session.commit()
     session.pop('cart', None)
-    flash('Order placed successfully!', category='success')
+    flash('Pedido realizado com sucesso!', category='success')
     return redirect(url_for('client.my_orders'))
 
 @client.route('/my_orders')
@@ -157,7 +157,7 @@ def cancel_order(order_id):
             db.session.commit()
             flash('Pedido cancelado com sucesso!', 'success')
         else:
-            flash('Somente pedidos pendentes podem ser cancelados.', 'warning')
+            flash('Somente pedidos pendentes podem ser cancelados.', 'danger')
     else:
         flash('Pedido não encontrado ou não autorizado.', 'danger')
 

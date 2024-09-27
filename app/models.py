@@ -1,3 +1,4 @@
+from datetime import datetime
 from . import db
 from flask_login import UserMixin
 from wtforms import PasswordField, StringField
@@ -40,6 +41,7 @@ class Order(db.Model):
     items = db.relationship('OrderItem', backref='order', lazy=True)
     total = db.Column(db.Float, nullable=False)
     user = db.relationship('User', backref='orders')
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
 
 class UpdateProfileForm(FlaskForm):

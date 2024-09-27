@@ -1,40 +1,83 @@
 {% extends "shared/base.html" %}
-{% block title %}My Orders{% endblock %}
+{% block title %}Meus Pedidos - SweetOrder{% endblock %}
 {% block content %}
 <div class="container">
-    <h2>My Orders</h2>
-    {% for order in orders %}
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center bg-light">
-            <div>
-                <strong>Order #{{ order.id }}</strong> - 
-                <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Em produção' %}badge-info{% elif order.status == 'Em rota de entrega' %}badge-primary{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
-                    {{ order.status }}</span></span>
+    <h2>Meus Pedidos</h2>
+    {% if order %}
+        {% for order in orders %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center bg-light">
+                <div>
+                    <strong>Order #{{ order.id }}</strong> | Horário: {{ order.created_at.strftime('%H:%M:%S') }}h - 
+                    <span>Status: <span class="badge {% if order.status == 'Pendente' %}badge-warning{% elif order.status == 'Finalizado' %}badge-success{% elif order.status == 'Em produção' %}badge-info{% elif order.status == 'Em rota de entrega' %}badge-primary{% elif order.status == 'Cancelado' %}badge-danger{% else %}badge-secondary{% endif %}">
+                        {{ order.status }}</span></span>
+                </div>
+                <div class="d-flex align-items-center">
+                    {% if order.status == 'Pendente' %}
+                    <button type="button" class="btn btn-sm btn-danger" onclick="openCancelModal('{{ order.id }}')">
+                        Cancelar Pedido
+                    </button>
+                    {% endif %}
+                    <strong> Total: ${{ order.total }}</strong>
+                </div>
             </div>
-            <div class="d-flex align-items-center">
-                {% if order.status == 'Pendente' %}
-                <form action="{{ url_for('client.cancel_order', order_id=order.id) }}" method="POST">
-                    <button type="submit" class="btn btn-sm btn-danger">Cancelar Pedido</button>
-                </form>
-                {% endif %}
-                <strong> Total: ${{ order.total }}</strong>
+            <ul class="list-group list-group-flush">
+                {% for item in order.items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                        {{ item.product.name }} 
+                    </div>
+                    <div>
+                        <span>Qty: {{ item.quantity }}</span> - 
+                        <strong>${{ item.product.price }}</strong>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="modal fade" id="confirmCancelModal" tabindex="-1" role="dialog" aria-labelledby="confirmCancelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmCancelLabel">Confirmar Cancelamento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Você tem certeza que deseja cancelar este pedido? Essa ação não pode ser desfeita.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" id="confirmCancelBtn">Cancelar Pedido</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <ul class="list-group list-group-flush">
-            {% for item in order.items %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                    {{ item.product.name }} 
-                </div>
-                <div>
-                    <span>Qty: {{ item.quantity }}</span> - 
-                    <strong>${{ item.product.price }}</strong>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endfor %}
+
+        <form id="cancel-order-form-{{ order.id }}" action="{{ url_for('client.cancel_order', order_id=order.id) }}" method="POST" style="display: none;">
+        </form>
+
+        {% endfor %}
+        {% else %}
+        <p>Nenhum pedido foi realizado.</p>
+        {% endif %}
 </div>
+
+<script>
+    let formToSubmit = null;
+
+    function openCancelModal(orderId) {
+        $('#confirmCancelModal').modal('show');
+        formToSubmit = document.getElementById('cancel-order-form-' + orderId);
+    }
+
+    document.getElementById('confirmCancelBtn').addEventListener('click', function() {
+        if (formToSubmit) {
+            formToSubmit.submit();
+        }
+    });
+</script>
 {% endblock %}

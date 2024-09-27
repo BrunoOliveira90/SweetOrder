@@ -20,28 +20,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.home') }}">Home</a>
+                        <a class="nav-link" href="{{ url_for('auth.home') }}">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('client.products') }}">Products</a>
+                        <a class="nav-link" href="{{ url_for('client.products') }}">Produtos</a>
                     </li>
                     {% if not current_user.admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('client.my_orders') }}">My Orders</a>
+                        <a class="nav-link" href="{{ url_for('client.my_orders') }}">Meus Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('client.cart') }}">Cart</a>
+                        <a class="nav-link" href="{{ url_for('client.cart') }}">Carrinho</a>
                     </li>
                     {% endif %}
                     {% if current_user.admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.adm_Dashboard') }}">Admin Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('admin.adm_Dashboard') }}">Painel do Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.admin_orders') }}">ORDERS</a>
+                        <a class="nav-link" href="{{ url_for('admin.admin_orders') }}">PEDIDOS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.addprod') }}">Add Product</a>
+                        <a class="nav-link" href="{{ url_for('admin.addprod') }}">Adicionar Produto</a>
                     </li>
                     {% endif %}
 
@@ -64,7 +64,7 @@
                         <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.sign_in') }}">Sign-in</a>
+                        <a class="nav-link" href="{{ url_for('auth.sign_in') }}">Registrar</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -109,14 +109,70 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; 2024 Application. All rights reserved.</p>
+                        <p>&copy; 2024 Aplicação Web. Todos os direitos reservados.</p>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+                        <a href="#" data-toggle="modal" data-target="#privacyModal">Política de Privacidade</a> |
+                        <a href="#" data-toggle="modal" data-target="#termsModal">Termos de Uso</a>
                     </div>
                 </div>
             </div>
         </footer>
+
+        <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacyModalLabel">Política de Privacidade</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Nós levamos sua privacidade a sério. Esta política descreve como coletamos, usamos e protegemos suas informações pessoais.</p>
+                        <ul>
+                            <li><strong>Coleta de Informações:</strong> Coletamos informações pessoais fornecidas por você, como nome, endereço de e-mail e informações de pagamento.</li>
+                            <li><strong>Uso das Informações:</strong> Usamos suas informações para processar pedidos, melhorar o atendimento ao cliente e enviar atualizações sobre nosso serviço.</li>
+                            <li><strong>Proteção de Dados:</strong> Tomamos medidas de segurança para garantir a proteção de suas informações contra acesso não autorizado.</li>
+                            <li><strong>Cookies:</strong> Utilizamos cookies para melhorar sua experiência de navegação em nosso site. Você pode desativá-los nas configurações do navegador.</li>
+                            <li><strong>Direitos de Privacidade:</strong> Você pode solicitar a exclusão ou modificação de suas informações a qualquer momento, entrando em contato conosco.</li>
+                            <li><strong>Alterações na Política:</strong> Podemos modificar esta política a qualquer momento, e todas as mudanças serão refletidas nesta página.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para Termos de Uso -->
+        <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="termsModalLabel">Termos de Uso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ao utilizar nosso site e serviços, você concorda com os seguintes termos e condições:</p>
+                        <ul>
+                            <li><strong>Aceitação dos Termos:</strong> Ao acessar nosso site, você concorda em cumprir os termos e condições aqui estabelecidos.</li>
+                            <li><strong>Uso Permitido:</strong> Você concorda em utilizar nosso site apenas para fins lícitos e de acordo com todas as leis aplicáveis.</li>
+                            <li><strong>Propriedade Intelectual:</strong> Todos os conteúdos, como textos, imagens e logos, são de nossa propriedade ou de terceiros e não podem ser usados sem autorização prévia.</li>
+                            <li><strong>Responsabilidade:</strong> Não nos responsabilizamos por danos diretos ou indiretos decorrentes do uso de nossos serviços.</li>
+                            <li><strong>Modificações:</strong> Reservamo-nos o direito de modificar ou descontinuar qualquer parte do serviço sem aviso prévio.</li>
+                            <li><strong>Rescisão de Acesso:</strong> Podemos encerrar ou suspender seu acesso a qualquer momento, sem aviso prévio, por violação destes termos.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
