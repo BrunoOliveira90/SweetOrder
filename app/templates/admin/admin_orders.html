@@ -13,7 +13,7 @@
                 </span></span>
             </div>
             <div class="d-flex align-items-center">
-                <strong>Total: ${{ order.total }}</strong>
+                <strong>Total: R$ {{ order.total }}</strong>
             </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -24,8 +24,8 @@
                     {{ item.product.name }} 
                 </div>
                 <div>
-                    <span>Qty: {{ item.quantity }}</span> - 
-                    <strong>${{ item.product.price }}</strong>
+                    <span>Qtd: {{ item.quantity }}</span> - 
+                    <strong>R$ {{ item.product.price }}</strong>
                 </div>
             </li>
             {% endfor %}

@@ -5,7 +5,7 @@ from app.models import Order, OrderItem, Product
 
 client = Blueprint('client', __name__)
 
-@client.route('/products')
+@client.route('/produtos')
 def products():
     products = Product.query.all()
     return render_template('client/products.html', products=products)
@@ -35,7 +35,7 @@ def add_to_cart(product_id):
     return redirect(url_for('client.products'))
 
 
-@client.route('/cart')
+@client.route('/carrinho')
 @login_required
 def cart():
     if current_user.admin:
@@ -132,7 +132,7 @@ def checkout():
     flash('Pedido realizado com sucesso!', category='success')
     return redirect(url_for('client.my_orders'))
 
-@client.route('/my_orders')
+@client.route('/meus_pedidos')
 @login_required
 def my_orders():
     if current_user.admin:

@@ -118,3 +118,42 @@ footer {
     background-color: #d89090; /* Cor de hover do botão primário */
     border-color: #d89090;
 }
+
+.carousel-image {
+    width: 100%;
+    height: 300px; /* Defina uma altura fixa para as imagens ficarem quadradas */
+    object-fit: cover; /* Isso mantém as imagens proporcionais dentro do quadrado */
+}
+
+@media (max-width: 768px) {
+    .carousel-image {
+        height: 200px; /* Reduza o tamanho das imagens em telas menores */
+    }
+}
+
+/* Estilização da imagem da confeiteira */
+.confeiteira-img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.9; /* Define a transparência da imagem */
+}
+
+/* Estilização da seção de quem sou eu */
+.quem-sou-eu-content {
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quem-sou-eu-content h2 {
+    font-size: 2rem;
+    color: #e4a0a0; /* Mantendo a paleta de cores */
+    font-weight: bold;
+}
+
+.quem-sou-eu-content .descricao {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+}
