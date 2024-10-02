@@ -8,9 +8,9 @@
             <thead>
                 <tr>
                     <th style="width: 50px; text-align: center;">-</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
                     <th>Total</th>
                     <th style="width: 160px; text-align: left;">
                         <form action="{{ url_for('client.clear_cart') }}" method="POST">
@@ -31,8 +31,8 @@
                         {{ item.quantity }}
                         <a href="{{ url_for('client.increase_quantity', product_id=product_id) }}" class="btn btn-sm btn-outline-primary">+</a>
                     </td>
-                    <td>${{ item.price }}</td>
-                    <td>${{ item.price * item.quantity }}</td>
+                    <td>R$ {{ item.price }}</td>
+                    <td>R$ {{ item.price * item.quantity }}</td>
                     <td>
                         <form action="{{ url_for('client.remove_from_cart', product_id=product_id) }}" method="POST" style="display:inline;">
                             <button type="submit" class="btn btn-danger btn-sm">Remover</button>
@@ -43,11 +43,11 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-end">    
-            <h3 style="margin-right: 20px;">Total: ${{ total }}</h3>
+            <h3 style="margin-right: 20px;">Total: R$ {{ total }}</h3>
         </div>
         <div class="d-flex justify-content-end">
             <form action="{{ url_for('client.checkout') }}" method="POST">
-                <button type="submit" class="btn btn-success">Checkout</button>
+                <button type="submit" class="btn btn-success">Enviar Pedido</button>
             </form>
         </div>
     {% else %}

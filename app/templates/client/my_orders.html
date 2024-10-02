@@ -3,7 +3,8 @@
 {% block content %}
 <div class="container">
     <h2>Meus Pedidos</h2>
-    {% if order %}
+    
+    {% if orders %}
         {% for order in orders %}
         <div class="card mb-4 shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center bg-light">
@@ -18,7 +19,7 @@
                         Cancelar Pedido
                     </button>
                     {% endif %}
-                    <strong> Total: ${{ order.total }}</strong>
+                    <strong> Total: R$ {{ order.total }}</strong>
                 </div>
             </div>
             <ul class="list-group list-group-flush">
@@ -29,8 +30,8 @@
                         {{ item.product.name }} 
                     </div>
                     <div>
-                        <span>Qty: {{ item.quantity }}</span> - 
-                        <strong>${{ item.product.price }}</strong>
+                        <span>Qtd: {{ item.quantity }}</span> - 
+                        <strong>R$ {{ item.product.price }}</strong>
                     </div>
                 </li>
                 {% endfor %}
@@ -59,11 +60,11 @@
 
         <form id="cancel-order-form-{{ order.id }}" action="{{ url_for('client.cancel_order', order_id=order.id) }}" method="POST" style="display: none;">
         </form>
-
         {% endfor %}
-        {% else %}
+    {% else %}
         <p>Nenhum pedido foi realizado.</p>
-        {% endif %}
+    {% endif %}
+
 </div>
 
 <script>

@@ -1,31 +1,31 @@
 {% extends "shared/base.html" %}
 
-{% block title %}Add Product - SweetOrder{% endblock %}
+{% block title %}Adicionar Product - SweetOrder{% endblock %}
 
 {% block content %}
 
 <div class="container mt-5">
-    <h2>Add Product</h2>
+    <h2>Adicionar Produto</h2>
     <form class="form-horizontal" method="POST" action="{{ url_for('admin.addprod') }}">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="first_name">Product Name:</label>
+                <label for="first_name">Título do Produto:</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="last_name">Price:</label>
+                <label for="last_name">Preço:</label>
                 <input type="number" step="0.01" min="0.01" class="form-control" id="price" name="price" placeholder="R$ 0,00" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="last_name">Image:</label>
-                <input type="text" class="form-control" id="image" name="image" placeholder="Image Url" required>
+                <label for="last_name">Imagem:</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="Url da imagem" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="cpf">Description:</label>
-            <textarea class="form-control" id="description" name="description" placeholder="Insert Text" maxlength="500"></textarea>
+            <label for="cpf">Descrição:</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Insita o texto" maxlength="500"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
 </div>
 

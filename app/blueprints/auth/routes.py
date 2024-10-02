@@ -79,7 +79,7 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth.route('/my_profile', methods=['GET', 'POST'])
+@auth.route('/meus_dados', methods=['GET', 'POST'])
 @login_required
 def update_profile():
     user = current_user
