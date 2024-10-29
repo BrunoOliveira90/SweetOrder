@@ -158,7 +158,7 @@ def adicionar_produtos_padrao():
         {
             'name': 'BOLO PERSONALIZADO - PASTA AMERICANA',
             'price': 219,
-            'image': 'https://lh3.googleusercontent.com/pw/AP1GczN8ngnY6gYZ_OOPrzCZ7ZnwwKGCZ9LmnZWlRaC29m8O6X5_ljfJEmVHdeR2GLt3YQwPnkC5sqOs7rPWp6kr9jsdmsU2xSYabG3dT-Q270ggR549EU2dbaFIMBGG-xQZlt3-Qo6VE_xKLshtbSlUCvQNmA=w873-h925-s-no-gm?authuser=2',
+            'image': 'https://lh3.googleusercontent.com/pw/AP1GczNaPWMQZmYoiilgyRhwuyNQK6Qd7ZDtTWL0JqGmrFp-Ep_TPQ7WtTHao5iTajtDIrif5SrY7fUgZwoeAnAIilCT64xXdQ69kGrPJg06QqiBYuqrV90qsWjPKXM5VSggwNkZpcW93rzOj6KAaHuBFVlbpg=w873-h925-s-no-gm?authuser=2',
             'description': 'Bolo personalizado para festas infantis com Pasta Americana - Consulte-nos para encomendar do seu jeito.'
         },
         {
