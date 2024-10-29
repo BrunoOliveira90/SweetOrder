@@ -4,7 +4,10 @@
 
 {% block content %}
 
-<h2 class="mb-4">Lista de Produtos</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Lista de Produtos</h2>
+    <a href="{{ url_for('admin.addprod') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Adicionar Produto</a>
+</div>
 {% if products|length == 0 %}
 <a href="{{ url_for('admin.adicionar_produtos_padrao') }}" class="btn btn-warning">Adicionar Produtos Padrão</a>
 {% endif %}
@@ -16,7 +19,7 @@
             <th>Título do Produto</th>
             <th>Preço</th>
             <th>Descrição</th>
-            <th>Excluir</th>
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody>
