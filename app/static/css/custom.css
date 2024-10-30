@@ -16,6 +16,7 @@ html, body {
 
 a, h1, h2, h3, h4, h5, h6, p, th, td {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    font-family: 'Roboto', sans-serif;
 }
 
 mark {
@@ -46,6 +47,7 @@ body {
 .navbar-custom .nav-link,
 .navbar-custom .navbar-text {
     color: #ffffff;
+    font-family: 'Roboto', sans-serif;
 }
 
 .navbar-custom .nav-link:hover,
@@ -170,4 +172,47 @@ footer {
 
 .logo img {
     max-width: 150px; /* Ajuste conforme o tamanho da logo */
+}
+/* Estilo personalizado para o dropdown do navbar */
+.navbar-custom .dropdown-menu {
+    background-color: #f4c2c2; /* Cor de fundo do dropdown */
+    border: none; /* Remove bordas */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra suave */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Fonte padrão do site */
+}
+
+.navbar-custom .dropdown-item {
+    color: #ffffff; /* Cor do texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* Sombra suave para o texto */
+    padding: 10px 20px;
+    transition: background-color 0.3s ease; /* Transição suave */
+    line-height: 1.5; /* Altura da linha para ajustar o espaçamento entre linhas */
+}
+
+.navbar-custom .dropdown-item:hover {
+    background-color: #e4a0a0; /* Cor de hover */
+    color: #f7e7e1;
+    border-radius: 5px;
+}
+
+/* Ajuste do ícone de seta do dropdown */
+.navbar-custom .dropdown-toggle::after {
+    color: #ffffff; /* Cor do ícone da seta */
+}
+
+/* Adiciona espaçamento entre os itens do dropdown */
+.navbar-custom .dropdown-menu .dropdown-item + .dropdown-item {
+    margin-top: 3px; /* Espaço entre itens */
+}
+
+/* Animação de fade-in para o menu */
+.navbar-custom .dropdown-menu {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

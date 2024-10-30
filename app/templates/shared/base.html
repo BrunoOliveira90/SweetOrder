@@ -22,8 +22,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.home') }}">Início</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('client.products') }}">Produtos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Produtos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ url_for('client.products') }}">Todos</a>                        
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='bolos') }}">Bolos</a>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='bolosdepote') }}">Bolos de Pote</a>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='docinhos') }}">Docinhos</a>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='aniver') }}">Aniversário</a>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='pascoa') }}">Páscoa</a>
+                          <a class="dropdown-item" href="{{ url_for('client.products_sort', category='natal') }}">Natal</a>
+                        </div>
                     </li>
                     {% if not current_user.admin %}
                     <li class="nav-item">
@@ -67,6 +79,7 @@
                 </ul>
             </div>
         </nav>
+        
 
         <div class="d-flex flex-column min-vh-100">
             <div class="container mt-4 mb-auto">
