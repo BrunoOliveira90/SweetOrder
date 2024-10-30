@@ -24,7 +24,7 @@
     <div class="row">
         
         <div class="col-md-4 mb-4">
-            <h3 class="text-center">Páscoa</h3>
+            <a href="{{ url_for('client.products_sort', category='pascoa') }}"><h3 class="text-center">Páscoa</h3></a>
             <div id="carouselPascoa" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -47,7 +47,7 @@
         </div>
 
         <div class="col-md-4 mb-4">
-            <h3 class="text-center">Natal</h3>
+            <a href="{{ url_for('client.products_sort', category='natal') }}"><h3 class="text-center">Natal</h3></a>
             <div id="carouselNatal" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="col-md-4 mb-4">
-            <h3 class="text-center">Aniversário</h3>
+            <a href="{{ url_for('client.products_sort', category='aniver') }}"><h3 class="text-center">Aniversário</h3></a>
             <div id="carouselAniversario" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -93,7 +93,7 @@
         </div>
     </div>
     <div class="row"><div class="col-md-4 mb-4">
-        <h3 class="text-center">Bolos</h3>
+        <a href="{{ url_for('client.products_sort', category='bolos') }}"><h3 class="text-center">Bolos</h3></a>
         <div id="carouselBolos" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -116,31 +116,33 @@
             </a></div>
         </div>
 
-        <div class="col-md-4 mb-4"><h3 class="text-center">Bolos de Pote</h3>
-        <div id="carouselBolosPote" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNBchZNGAJlKj-W7YrgK9Wut8fLt152gEXXxVyZDq05eeFskWJVMQ8QrDkHeSCPh7vavjLnBYM7qwuXPkX7YXNuljrBI5DKEAna8ayu1RQgbn61Xwoyhhp1QDr81nktC4ztB9LTJhR3SEF3oosMpJaSwg=w824-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 1 de Bolos de Pote">
+        <div class="col-md-4 mb-4">
+            <a href="{{ url_for('client.products_sort', category='bolosdepote') }}"><h3 class="text-center">Bolos de Pote</h3></a>
+                <div id="carouselBolosPote" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczNBchZNGAJlKj-W7YrgK9Wut8fLt152gEXXxVyZDq05eeFskWJVMQ8QrDkHeSCPh7vavjLnBYM7qwuXPkX7YXNuljrBI5DKEAna8ayu1RQgbn61Xwoyhhp1QDr81nktC4ztB9LTJhR3SEF3oosMpJaSwg=w824-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 1 de Bolos de Pote">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczPdzw8od0pUvhGl4Z_W7DWBFK5n7LsogZoYSIKsBB_CDABQOEp-iT95xkkrgH6ZS_HDcPQGDPh-0Lwv8tD76RW8HaSEiFGlMX9hlQ7yOIt_P8swNw75c9sxOCfQaVhbNVOb2sLE22x4NlOeFMHpnqC48A=w756-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 2 de Bolos de Pote">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczP_qPb2hOz3bhn_FaZkFTb9LsTcQajIouTyTIBjGuJy5txyvFYxTUMrKy2dOJeYlrsFdE1mr2dpG4QnnwBhaIPxubs2oDY_py3K90eNb3Y2vpCO6Mc9gSWJmOqxy0GJKlmh5f8EZca1v_Vp8d3XMqXerg=w740-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 3 de Bolos de Pote">
+                        </div>
+                    </div>
+                
+                    <a class="carousel-control-prev" href="#carouselBolosPote" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselBolosPote" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a></div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPdzw8od0pUvhGl4Z_W7DWBFK5n7LsogZoYSIKsBB_CDABQOEp-iT95xkkrgH6ZS_HDcPQGDPh-0Lwv8tD76RW8HaSEiFGlMX9hlQ7yOIt_P8swNw75c9sxOCfQaVhbNVOb2sLE22x4NlOeFMHpnqC48A=w756-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 2 de Bolos de Pote">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP_qPb2hOz3bhn_FaZkFTb9LsTcQajIouTyTIBjGuJy5txyvFYxTUMrKy2dOJeYlrsFdE1mr2dpG4QnnwBhaIPxubs2oDY_py3K90eNb3Y2vpCO6Mc9gSWJmOqxy0GJKlmh5f8EZca1v_Vp8d3XMqXerg=w740-h925-s-no-gm?authuser=2" class="d-block w-100" alt="Imagem 3 de Bolos de Pote">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselBolosPote" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselBolosPote" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a></div>
-        </div>
 
         <div class="col-md-4 mb-4">
-            <h3 class="text-center">Docinhos</h3>
+            <a href="{{ url_for('client.products_sort', category='docinhos') }}"><h3 class="text-center">Docinhos</h3></a>
             <div id="carouselBombons" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -164,6 +166,13 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="map container section" id="map">
+    <h2>Localização</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14399.764329120342!2d-54.5261643!3d-25.5403394!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f69bde6c62f2cd%3A0xbedb28b5c4919ff9!2sDoceria%20Kau%20Magnabosco!5e0!3m2!1spt-BR!2sbr!4v1730252433451!5m2!1spt-BR!2sbr" 
+      width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+    </iframe>
 </div>
 
 {% endblock %}

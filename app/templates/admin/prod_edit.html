@@ -17,6 +17,9 @@
 
     <label for="description">Descrição:</label>
     <textarea class="form-control" id="description" name="description" placeholder="Insira o texto" maxlength="500">{{ product.description }}</textarea>
+
+    <label for="category">Categoria:</label>
+    <textarea class="form-control" id="category" name="category" placeholder="{{ product.category }}" maxlength="500">{{ product.category }}</textarea>
     
     <button type="submit" class="btn btn-primary">Salvar Alterações</button>
 </form>

@@ -1,6 +1,6 @@
-from flask import Blueprint, flash, render_template, redirect, session, url_for
+from flask import Blueprint, flash, render_template, redirect, request, session, url_for
 from flask_login import current_user, login_required
-from app import auth, db
+from app import db
 from app.models import Order, OrderItem, Product
 
 client = Blueprint('client', __name__)
@@ -10,7 +10,15 @@ def products():
     products = Product.query.all()
     return render_template('client/products.html', products=products)
 
+@client.route('/produtos_sort')
+def products_sort():
+    category = request.args.get('category')
 
+    if category:
+        products = Product.query.filter_by(category=category).all()
+    else:
+        products = Product.query.all()
+    return render_template('client/products.html', products=products)
 
 @client.route('/add_to_cart/<int:product_id>')
 @login_required

@@ -26,6 +26,7 @@ class Product(db.Model):
     description = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(5000), nullable=False)
+    category = db.Column(db.String(50), nullable=False)
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
