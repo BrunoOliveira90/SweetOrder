@@ -13,4 +13,4 @@ def promover_admin(email):
         else:
             print(f'Usuário com o e-mail {email} não encontrado.')
 
-promover_admin('test1@gmail')
+promover_admin('admin@test')
