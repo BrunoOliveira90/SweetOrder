@@ -16,27 +16,6 @@ def adm_Dashboard():
     products = Product.query.all()
     return render_template('admin/dashboard.html', users=users, products=products)
 
-@admin.route('/admin/update_order_status/<int:order_id>', methods=['POST'])
-@login_required
-def update_order_status(order_id):
-    if not current_user.admin:
-        flash('Acesso negado. Apenas administradores podem alterar o status dos pedidos.', 'danger')
-        return redirect(url_for('admin.admin_orders'))
-
-    order = Order.query.get_or_404(order_id)
-    
-    new_status = request.form.get('status')
-
-    if new_status:
-        order.status = new_status
-        db.session.commit()
-        flash(f'Status do pedido #{order.id} atualizado para {new_status}', 'success')
-    else:
-        flash('Selecione um status válido.', 'danger')
-
-    return redirect(url_for('admin.admin_orders'))
-
-
 @admin.route('/adicionar_produto', methods=['GET', 'POST'])
 @login_required
 def addprod():
@@ -112,6 +91,27 @@ def admin_orders():
     
     orders = Order.query.all()
     return render_template('admin/admin_orders.html', orders=orders)
+
+@admin.route('/admin/update_order_status/<int:order_id>', methods=['POST'])
+@login_required
+def update_order_status(order_id):
+    if not current_user.admin:
+        flash('Acesso negado. Apenas administradores podem alterar o status dos pedidos.', 'danger')
+        return redirect(url_for('admin.admin_orders'))
+
+    order = Order.query.get_or_404(order_id)
+    
+    new_status = request.form.get('status')
+
+    if new_status:
+        order.status = new_status
+        db.session.commit()
+        flash(f'Status do pedido #{order.id} atualizado para {new_status}', 'success')
+    else:
+        flash('Selecione um status válido.', 'danger')
+
+    return redirect(url_for('admin.admin_orders'))
+
 
 @admin.route('/delete_order/<int:order_id>', methods=['POST'])
 def delete_order(order_id):

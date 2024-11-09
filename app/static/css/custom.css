@@ -192,19 +192,19 @@ footer {
 }
 
 .navbar-custom .dropdown-item:hover {
-    background-color: #e4a0a0; /* Cor de hover */
+    background-color: #e4a0a0; /* Cor de hover, mais escura */
     color: #f7e7e1;
     border-radius: 5px;
 }
 
 /* Ajuste do ícone de seta do dropdown */
 .navbar-custom .dropdown-toggle::after {
-    color: #ffffff; /* Cor do ícone da seta */
+    color: #ffffff; 
 }
 
 /* Adiciona espaçamento entre os itens do dropdown */
 .navbar-custom .dropdown-menu .dropdown-item + .dropdown-item {
-    margin-top: 3px; /* Espaço entre itens */
+    margin-top: 3px; 
 }
 
 /* Animação de fade-in para o menu */
